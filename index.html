@@ -18328,7 +18328,7 @@ section:last-child{border-bottom:none;}
   </div>
 </div>
 
-<!-- DEAL ALERT SIGN-UP MODAL (Brevo) -->
+<!-- DEAL ALERT SIGN-UP MODAL -->
 <div class="modal-overlay" id="alertOverlay" onclick="if(event.target===this)closeAlertModal()">
   <div class="modal">
     <button class="modal-close" onclick="closeAlertModal()">✕</button>
@@ -18691,7 +18691,7 @@ function openInquiry(lineName, ship, title, dep, price) {
   document.body.style.overflow = "hidden";
 }
 
-// SUBMIT INQUIRY (Web3forms + Brevo)
+// SUBMIT INQUIRY (Web3forms)
 async function submitInquiry(e) {
   e.preventDefault();
   const form = document.getElementById("inquiryForm");
@@ -18703,35 +18703,7 @@ async function submitInquiry(e) {
     const res = await fetch("https://api.web3forms.com/submit", {method:"POST", body:data});
     const json = await res.json();
     if(json.success) {
-      // Also add to Brevo for email alert + Excel tracking
       const voyage = document.getElementById("iqVoyage").value || "";
-      const cabins = data.get("cabins") || "";
-      const cabinType = data.get("cabin_type") || "";
-      const adults = data.get("adults") || "";
-      const children = data.get("children") || "";
-      const cabinSummary = [cabins, cabinType, adults ? adults + " adults" : "", children ? children + " children" : ""].filter(Boolean).join(" | ");
-      const travelStyle = data.get("travel_style") || "";
-      const shipLoc = data.get("ship_location") || "";
-      const notesRaw = data.get("notes") || "";
-      const fullNotes = [voyage, travelStyle, shipLoc, notesRaw].filter(Boolean).join(" | ");
-      fetch("https://api.brevo.com/v3/contacts", {
-        method: "POST",
-        headers: {"Content-Type":"application/json","api-key":"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"},
-        body: JSON.stringify({
-          email: data.get("email"),
-          attributes: {
-            FIRSTNAME: data.get("first_name") || "",
-            LASTNAME:  data.get("last_name") || "",
-            PHONE:     data.get("phone") || "",
-            CONTACT_PREF: "Email",
-            SOURCE:    "LidoTravel.ca - Deal Inquiry | " + voyage,
-            CABINS:    cabinSummary,
-            NOTES:     fullNotes
-          },
-          listIds: [2],
-          updateEnabled: true
-        })
-      }).catch(()=>{}); // silent — Web3Forms already succeeded
       fetch("https://script.google.com/macros/s/AKfycbxMvKLAyhNjaAk3OBg1YhCdGNv8G0W9oNhUAPOGWcvSErt2JRnJmBOxJTvL4dzFjrplKg/exec",{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain"},body:JSON.stringify({source:"LidoTravel.ca - Deal Inquiry",first_name:data.get("first_name")||"",last_name:data.get("last_name")||"",email:data.get("email")||"",phone:data.get("phone")||"",voyage:document.getElementById("iqVoyage").value||"",cabins:data.get("cabins")||"",cabin_type:data.get("cabin_type")||"",adults:data.get("adults")||"",children:data.get("children")||"",travel_style:data.get("travel_style")||"",notes:data.get("notes")||""})}).catch(()=>{});
       document.getElementById("inquiryForm").style.display = "none";
       document.getElementById("inquirySuccess").style.display = "block";
@@ -18747,7 +18719,7 @@ async function submitInquiry(e) {
   }
 }
 
-// SUBMIT ALERT (Brevo)
+// SUBMIT ALERT (Web3forms)
 async function submitAlert(e) {
   e.preventDefault();
   const btn = document.getElementById("alertSubmitBtn");
@@ -18789,13 +18761,6 @@ async function submitAlert(e) {
     w3data.append("source", "LidoTravel.ca - Custom Quote");
     const w3res = await fetch("https://api.web3forms.com/submit", {method:"POST", body:w3data});
     const w3json = await w3res.json();
-
-    // Also save to Brevo silently for record-keeping
-    fetch("https://api.brevo.com/v3/contacts", {
-      method: "POST",
-      headers: {"Content-Type":"application/json","api-key":"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"},
-      body: JSON.stringify({email, attributes, listIds:[2], updateEnabled:true})
-    }).catch(()=>{});
 
     if(w3json.success) {
       fetch("https://script.google.com/macros/s/AKfycbxMvKLAyhNjaAk3OBg1YhCdGNv8G0W9oNhUAPOGWcvSErt2JRnJmBOxJTvL4dzFjrplKg/exec",{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain"},body:JSON.stringify({source:"LidoTravel.ca - Custom Quote",first_name:fname,last_name:lname,email:email,phone:phone,where:q1,when:q2,who:q3,important:q4})}).catch(()=>{});
