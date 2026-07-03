@@ -486,10 +486,10 @@ section:last-child{border-bottom:none;}
 .view-results-btn:hover{background:var(--gold-light);}
 .view-results-btn.hidden-btn{opacity:0;pointer-events:none;}
 @media(max-width:600px){.view-results-btn{font-size:0.95rem;padding:15px 24px;bottom:14px;}}
-/* Fix 8: Sticky change-filters bar */
-.filters-sticky-bar{position:fixed;top:72px;left:0;right:0;z-index:997;background:rgba(10,22,40,0.95);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-bottom:1px solid rgba(201,168,76,0.2);padding:10px 16px;text-align:center;}
-.filters-sticky-btn{font-family:"Jost",sans-serif;font-size:0.82rem;font-weight:400;letter-spacing:0.1em;background:transparent;color:var(--gold);border:1px solid rgba(201,168,76,0.4);border-radius:20px;padding:8px 24px;cursor:pointer;transition:all 0.2s;}
-.filters-sticky-btn:hover{background:rgba(201,168,76,0.1);border-color:var(--gold);}
+/* Back-to-selection floating button */
+.back-to-selection-btn{position:fixed;right:16px;right:calc(16px + env(safe-area-inset-right));top:50%;transform:translateY(-50%);z-index:900;width:48px;height:48px;border-radius:50%;background:rgba(10,22,40,0.85);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border:1px solid rgba(201,168,76,0.4);color:var(--gold);display:none;align-items:center;justify-content:center;font-size:1.3rem;cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,0.35);transition:background 0.2s,border-color 0.2s;}
+.back-to-selection-btn:hover{background:rgba(201,168,76,0.15);border-color:var(--gold);}
+@media(max-width:768px){.back-to-selection-btn{width:44px;height:44px;right:10px;right:calc(10px + env(safe-area-inset-right));}}
 
 /* Language switcher */
 .lang-switcher{display:flex;align-items:center;gap:0;border:1px solid rgba(201,168,76,0.35);border-radius:20px;overflow:hidden;margin-left:12px;}
@@ -582,12 +582,7 @@ section:last-child{border-bottom:none;}
   </div>
 
 
-<!-- Fix 8: Sticky change-filters bar -->
-<div class="filters-sticky-bar" id="filtersStickyBar" style="display:none;">
-  <button class="filters-sticky-btn" onclick="document.getElementById('filterPanel').scrollIntoView({behavior:'smooth',block:'start'})">
-    <span data-i18n="sticky.filters">⚙ Change Filters</span>
-  </button>
-</div>
+<button class="back-to-selection-btn" id="backToSelectionBtn" onclick="document.getElementById('filterPanel').scrollIntoView({behavior:'smooth',block:'start'})" aria-label="Back to Selection" title="Back to Selection">↑</button>
   <div class="filter-bar-v2 fade-in" id="filterPanel">
     <div class="fcard">
       <div class="fstep-row">
@@ -897,6 +892,17 @@ section:last-child{border-bottom:none;}
 const nav=document.getElementById("mainNav");
 window.addEventListener("scroll",()=>nav.classList.toggle("scrolled",scrollY>60));
 
+// Back-to-selection floating button visibility
+const backToSelectionBtn=document.getElementById("backToSelectionBtn");
+function updateBackToSelectionBtn(){
+  const filterPanel=document.getElementById("filterPanel");
+  if(!backToSelectionBtn||!filterPanel) return;
+  const fpBottom=filterPanel.getBoundingClientRect().bottom;
+  backToSelectionBtn.style.display = fpBottom < 0 ? "flex" : "none";
+}
+window.addEventListener("scroll",updateBackToSelectionBtn);
+updateBackToSelectionBtn();
+
 // HERO SLIDESHOW
 const slides=document.querySelectorAll(".hero-slide");
 let cur=0,tmr;
@@ -1183,12 +1189,6 @@ function filterDeals() {
 
   const vrc = document.getElementById("viewResultsCount");
   if(vrc) vrc.textContent = shown;
-  const stickyBar = document.getElementById("filtersStickyBar");
-  const filterPanel = document.getElementById("filterPanel");
-  if(stickyBar && filterPanel) {
-    const fpBottom = filterPanel.getBoundingClientRect().bottom;
-    stickyBar.style.display = fpBottom < 0 ? "block" : "none";
-  }
 }
 
 function renderNextPage() {
@@ -2015,7 +2015,7 @@ const TRANSLATIONS = {
     'label.interior':'Interior','label.balcony':'Balcony','label.free':'FREE',
     'label.3rd4th':'3rd & 4th Guest','label.nights':'Nights',
     'cta.quote':"I'm Interested — Send Me a Quote",'cta.ship':'🚢 View Ship Details',
-    'card.ports':'📍 See Where We Stop','modal.ports.title':'Ports of Call','excel.link':'See the full list in Excel','sticky.filters':'⚙ Change Filters',
+    'card.ports':'📍 See Where We Stop','modal.ports.title':'Ports of Call','excel.link':'See the full list in Excel',
     'results.suffix':'Matching Cruises ↓',
     'form.title':'Get Your <em>Custom Quote</em>',
     'form.sub':'Tell us about your dream cruise and we\'ll reply within 24 hours',
@@ -2051,7 +2051,7 @@ const TRANSLATIONS = {
     'label.interior':'內艙','label.balcony':'陽台艙','label.free':'免費',
     'label.3rd4th':'第3及4位旅客','label.nights':'晚',
     'cta.quote':'我有興趣 — 請給我報價','cta.ship':'🚢 查看郵輪詳情',
-    'card.ports':'📍 查看停靠港','modal.ports.title':'停靠港一覽','excel.link':'查看Excel完整列表','sticky.filters':'⚙ 更改篩選條件',
+    'card.ports':'📍 查看停靠港','modal.ports.title':'停靠港一覽','excel.link':'查看Excel完整列表',
     'results.suffix':'個符合的郵輪 ↓',
     'form.title':'索取您的<em>專屬報價</em>',
     'form.sub':'請告訴我們您的郵輪夢想之旅，我們會在24小時內回覆',
