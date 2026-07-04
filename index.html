@@ -7,7 +7,9 @@
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
+  gtag('consent', 'default', {
+    'analytics_storage': (localStorage.getItem('lidoCookieConsent') === 'accepted') ? 'granted' : 'denied'
+  });
   gtag('config', 'G-7DXT5GZXW4');
 </script>
 <meta charset="UTF-8">
@@ -3060,6 +3062,37 @@ document.addEventListener('DOMContentLoaded', () => {
      LEGEND OF THE SEAS
 ═══════════════════════════════════════════════════ -->
 
+
+
+<div id="cookieConsentBanner" style="display:none;position:fixed;left:0;right:0;bottom:0;z-index:9999;background:#060f1e;border-top:1px solid rgba(201,168,76,0.35);padding:18px 24px;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;font-family:'Jost',sans-serif;color:#fff;">
+  <p style="margin:0;font-size:0.78rem;font-weight:200;color:rgba(255,255,255,0.75);max-width:640px;line-height:1.6;">
+    We use cookies (Google Analytics) to understand site traffic. See our
+    <a href="/privacy.html" style="color:#C9A84C;text-decoration:underline;">Privacy Policy</a> for details.
+  </p>
+  <div style="display:flex;gap:10px;flex-shrink:0;">
+    <button onclick="lidoCookieConsent(false)" style="background:transparent;border:1px solid rgba(255,255,255,0.35);color:#fff;padding:9px 18px;font-family:'Jost',sans-serif;font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;cursor:pointer;">Decline</button>
+    <button onclick="lidoCookieConsent(true)" style="background:#C9A84C;border:none;color:#0A1628;padding:9px 20px;font-family:'Jost',sans-serif;font-size:0.72rem;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;cursor:pointer;">Accept</button>
+  </div>
+</div>
+<script>
+(function(){
+  function lidoCookieConsent(accepted){
+    localStorage.setItem('lidoCookieConsent', accepted ? 'accepted' : 'declined');
+    if (window.gtag) {
+      gtag('consent', 'update', {'analytics_storage': accepted ? 'granted' : 'denied'});
+    }
+    var b = document.getElementById('cookieConsentBanner');
+    if (b) b.style.display = 'none';
+  }
+  window.lidoCookieConsent = lidoCookieConsent;
+  document.addEventListener('DOMContentLoaded', function(){
+    if (!localStorage.getItem('lidoCookieConsent')) {
+      var b = document.getElementById('cookieConsentBanner');
+      if (b) { b.style.display = 'flex'; }
+    }
+  });
+})();
+</script>
 
 </body>
 </html>
