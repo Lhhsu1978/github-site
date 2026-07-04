@@ -790,7 +790,7 @@ section:last-child{border-bottom:none;}
     <p id="footer-disclaimer" style="color:rgba(255,255,255,0.35);font-size:0.65rem;line-height:1.7;margin-bottom:10px;max-width:860px;margin-left:auto;margin-right:auto;text-align:center;">
       All prices are in Canadian dollars (CAD), shown as "from" price per person based on double occupancy, and are subject to change without notice. Prices reflect cruise fare only and do not include airfare or gratuities unless otherwise stated. Taxes and port fees are included. Availability is not guaranteed. <strong style="color:rgba(255,255,255,0.55);">Only a written quote provided directly by Lido Travel constitutes a confirmed price.</strong> Lido Travel acts as an independent travel agent. We recommend purchasing travel insurance. All bookings are subject to the terms and conditions of the applicable cruise line.
     </p>
-    <p data-i18n="footer.copy">© 2026 Lido Travel. All rights reserved.</p><p style="color:var(--gold);letter-spacing:0.2em;font-size:0.6rem;" data-i18n="footer.slogan">AFFORDABLE LUXURY AT SEA</p>
+    <p data-i18n="footer.copy">© 2026 Lido Travel. All rights reserved. <a href="/privacy.html" style="color:inherit;text-decoration:underline;">Privacy Policy</a></p><p style="color:var(--gold);letter-spacing:0.2em;font-size:0.6rem;" data-i18n="footer.slogan">AFFORDABLE LUXURY AT SEA</p>
   </div>
 </footer>
 
@@ -1246,8 +1246,7 @@ async function submitInquiry(e) {
     const json = await res.json();
     if(json.success) {
       const voyage = document.getElementById("iqVoyage").value || "";
-      fetch("https://script.google.com/macros/s/AKfycbxMvKLAyhNjaAk3OBg1YhCdGNv8G0W9oNhUAPOGWcvSErt2JRnJmBOxJTvL4dzFjrplKg/exec",{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain"},body:JSON.stringify({source:"LidoTravel.ca - Deal Inquiry",first_name:data.get("first_name")||"",last_name:data.get("last_name")||"",email:data.get("email")||"",phone:data.get("phone")||"",voyage:document.getElementById("iqVoyage").value||"",cabins:data.get("cabins")||"",cabin_type:data.get("cabin_type")||"",adults:data.get("adults")||"",children:data.get("children")||"",travel_style:data.get("travel_style")||"",notes:data.get("notes")||""})}).catch(()=>{});
-      document.getElementById("inquiryForm").style.display = "none";
+            document.getElementById("inquiryForm").style.display = "none";
       document.getElementById("inquirySuccess").style.display = "block";
     } else {
       btn.textContent = "Send My Inquiry →";
@@ -1305,8 +1304,7 @@ async function submitAlert(e) {
     const w3json = await w3res.json();
 
     if(w3json.success) {
-      fetch("https://script.google.com/macros/s/AKfycbxMvKLAyhNjaAk3OBg1YhCdGNv8G0W9oNhUAPOGWcvSErt2JRnJmBOxJTvL4dzFjrplKg/exec",{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain"},body:JSON.stringify({source:"LidoTravel.ca - Custom Quote",first_name:fname,last_name:lname,email:email,phone:phone,where:q1,when:q2,who:q3,important:q4})}).catch(()=>{});
-      document.getElementById("alertForm").style.display = "none";
+            document.getElementById("alertForm").style.display = "none";
       document.getElementById("alertSuccess").style.display = "block";
     } else {
       btn.textContent = "Get My Custom Quote →";
