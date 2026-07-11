@@ -100,6 +100,13 @@ section{padding:96px 40px;}
 .af-tag{background:rgba(201,168,76,0.12);border:1px solid rgba(201,168,76,0.4);color:var(--navy);font-size:0.75rem;letter-spacing:0.06em;padding:6px 14px;border-radius:20px;cursor:pointer;display:flex;align-items:center;gap:6px;font-weight:400;}
 .af-tag::after{content:"×";font-size:0.9rem;}
 .clear-all{font-size:0.82rem;font-weight:500;letter-spacing:0.08em;cursor:pointer;padding:6px 16px;border-radius:20px;background:rgba(201,168,76,0.15);border:1px solid rgba(201,168,76,0.5);color:var(--navy);text-decoration:none;pointer-events:auto;position:relative;z-index:10;font-family:"Jost",sans-serif;}
+.nav-right-group{display:flex;align-items:center;gap:8px;margin-left:12px;}
+.nav-bell-btn{background:transparent;border:1px solid rgba(255,255,255,0.5);color:#FFFFFF;width:34px;height:34px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:1rem;line-height:1;cursor:pointer;transition:all 0.2s;flex-shrink:0;text-decoration:none;}
+nav.scrolled .nav-bell-btn{border-color:rgba(10,22,40,0.35);color:#0A1628;}
+.nav-bell-btn:hover{border-color:var(--gold);background:rgba(201,168,76,0.15);}
+.subscribe-cta-btn{display:inline-flex;align-items:center;gap:8px;background:rgba(201,168,76,0.12);border:1px solid var(--gold);color:var(--navy);padding:13px 24px;border-radius:24px;font-family:"Jost",sans-serif;font-size:0.78rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;cursor:pointer;transition:all 0.2s;white-space:nowrap;text-decoration:none;}
+.subscribe-cta-btn:hover{background:var(--gold-fill);transform:translateY(-1px);}
+@media(max-width:600px){.subscribe-cta-btn{width:100%;justify-content:center;padding:14px 20px;}}
 .clear-all:hover{background:rgba(201,168,76,0.28);color:#0A1628;}
 
 /* DEALS GRID */
@@ -495,7 +502,7 @@ section:last-child{border-bottom:none;}
 @media(max-width:768px){.back-to-selection-btn{width:44px;height:44px;right:10px;right:calc(10px + env(safe-area-inset-right));}}
 
 /* Language switcher */
-.lang-switcher{display:flex;align-items:center;gap:0;border:1px solid rgba(201,168,76,0.35);border-radius:20px;overflow:hidden;margin-left:12px;}
+.lang-switcher{display:flex;align-items:center;gap:0;border:1px solid rgba(201,168,76,0.35);border-radius:20px;overflow:hidden;}
 .lang-btn{background:transparent;border:none;color:rgba(255,255,255,0.85);font-family:"Jost",sans-serif;font-size:0.68rem;font-weight:400;letter-spacing:0.1em;padding:6px 12px;cursor:pointer;transition:all 0.2s;}
 nav.scrolled .lang-btn{color:rgba(10,22,40,0.82);}
 .lang-btn.active{background:var(--gold-fill);color:var(--navy);font-weight:600;}
@@ -567,7 +574,10 @@ nav.scrolled .lang-btn{color:rgba(10,22,40,0.82);}
   <ul class="nav-links">
     <li><a href="index.html" class="nav-cta" style="text-decoration:none;display:inline-flex;align-items:center;" data-i18n="about.nav.browse">⛴ Browse Cruise Deals</a></li>
   </ul>
-  <div class="lang-switcher"><button class="lang-btn active" onclick="setLang('en')">EN</button><button class="lang-btn" onclick="setLang('zh')">繁中</button></div>
+  <div class="nav-right-group">
+    <a href="index.html?subscribe=1" class="nav-bell-btn" aria-label="Alert Me for Future Deals" title="Alert Me for Future Deals">🔔</a>
+    <div class="lang-switcher"><button class="lang-btn active" onclick="setLang('en')">EN</button><button class="lang-btn" onclick="setLang('zh')">繁中</button></div>
+  </div>
 </nav>
 
 <section style="max-width:760px;margin:0 auto;padding:140px 24px 40px;">
@@ -575,6 +585,12 @@ nav.scrolled .lang-btn{color:rgba(10,22,40,0.82);}
   <img src="linda pic.png" alt="Linda, founder of Lido Travel" style="display:block;width:150px;height:150px;border-radius:50%;object-fit:cover;margin:0 auto 20px;border:3px solid #FFFFFF;box-shadow:0 6px 20px rgba(10,22,40,0.15);">
   <h1 style="font-family:'Cormorant Garamond',serif;font-size:2.6rem;font-weight:500;text-align:center;color:var(--white);margin-bottom:14px;" data-i18n="about.greeting.h1">Hey, I'm Linda 👋</h1>
   <p style="font-family:'Jost',sans-serif;font-size:1.05rem;font-weight:300;text-align:center;color:rgba(10,22,40,0.8);line-height:1.7;max-width:560px;margin:0 auto 40px;" data-i18n="about.greeting.p">Welcome aboard! Lido Travel is a home-based travel agency I started in Toronto in early 2026. I'm new, but I'm the real deal — properly licensed and here to help you find a cruise you'll actually love.</p>
+
+  <div style="background:rgba(201,168,76,0.08);border:1px solid var(--gold);border-radius:8px;padding:24px 28px;text-align:center;margin-bottom:32px;">
+    <p style="font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:500;color:var(--white);margin-bottom:6px;" data-i18n="about.subscribe.h">Not Ready to Book Yet?</p>
+    <p style="font-family:'Jost',sans-serif;font-size:0.88rem;font-weight:300;color:rgba(10,22,40,0.78);margin-bottom:16px;" data-i18n="about.subscribe.p">Tell us what you're looking for and we'll email you the moment a matching deal drops — no pressure, unsubscribe anytime.</p>
+    <a href="index.html?subscribe=1" class="subscribe-cta-btn" data-i18n="about.subscribe.btn">🔔 Alert Me for Future Deals</a>
+  </div>
 
   <div style="background:#FFFFFF;border:1px solid rgba(10,22,40,0.1);border-radius:6px;padding:32px 28px;text-align:center;margin-bottom:56px;box-shadow:0 4px 20px rgba(10,22,40,0.06);">
     <h2 style="font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:600;color:var(--white);margin-bottom:8px;" data-i18n="about.contact.h2">Best Way to Reach Me</h2>
@@ -607,6 +623,11 @@ nav.scrolled .lang-btn{color:rgba(10,22,40,0.82);}
       <p style="font-family:'Jost',sans-serif;font-size:0.95rem;font-weight:300;color:rgba(10,22,40,0.8);line-height:1.7;" data-i18n="about.faq4.p">Flights — yes, if they're part of your cruise package. Hotels and tours — just message me on <a href="https://wa.me/15793810358?text=Hi%21%20I%27m%20interested%20in%20a%20cruise%20deal" target="_blank" rel="noopener" style="color:var(--gold-fill);font-weight:500;">WhatsApp</a> with what you're after. Even if I can't score you a better deal, I'll point you somewhere good.</p>
     </div>
 
+    <div>
+      <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:600;color:var(--white);margin-bottom:8px;" data-i18n="about.faq5.h">Not Sure You Want to Book Yet?</h3>
+      <p style="font-family:'Jost',sans-serif;font-size:0.95rem;font-weight:300;color:rgba(10,22,40,0.8);line-height:1.7;" data-i18n="about.faq5.p">Totally fine — no pressure! If you'd rather wait and see, hit the <a href="index.html?subscribe=1" style="color:var(--gold-fill);font-weight:500;">🔔 Alert Me</a> button and tell us what you're looking for (region, season, cruise line — or leave it all blank). We'll email you the moment a matching deal comes up, so you can just sit back and wait for the right one to land in your inbox.</p>
+    </div>
+
   </div>
 </section>
 
@@ -621,6 +642,8 @@ nav.scrolled .lang-btn{color:rgba(10,22,40,0.82);}
       <p style="font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--navy);margin-bottom:10px;" data-i18n="about.footer.getintouch">Get In Touch</p>
       <p style="font-size:0.8rem;color:rgba(10,22,40,0.78);margin-bottom:8px;"><a href="https://wa.me/15793810358?text=Hi%21%20I%27m%20interested%20in%20a%20cruise%20deal" target="_blank" rel="noopener" style="color:rgba(10,22,40,0.78);text-decoration:none;" data-i18n="about.footer.whatsapp">WhatsApp Chat</a></p>
       <p style="font-size:0.8rem;color:rgba(10,22,40,0.78);"><a href="mailto:linda@lidotravel.ca" style="color:rgba(10,22,40,0.78);text-decoration:none;">linda@lidotravel.ca</a></p>
+      <p style="font-size:0.8rem;color:rgba(10,22,40,0.78);margin-top:8px;"><a href="https://www.facebook.com/profile.php?id=61589242261906" target="_blank" rel="noopener" style="color:rgba(10,22,40,0.78);text-decoration:none;" data-i18n="about.footer.facebook">Facebook</a></p>
+      <p style="font-size:0.8rem;color:rgba(10,22,40,0.78);"><a href="https://instagram.com/lidotravel.ca/" target="_blank" rel="noopener" style="color:rgba(10,22,40,0.78);text-decoration:none;" data-i18n="about.footer.instagram">Instagram</a></p>
     </div>
     <div class="ftb" style="min-width:180px;">
       <p style="font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--navy);margin-bottom:10px;" data-i18n="about.footer.legal">Legal</p>
@@ -654,6 +677,13 @@ const ABOUT_TRANSLATIONS = {
     'about.faq3.p': 'I only post ships I\'d actually recommend — newer, well-reviewed, good value. Think of it as skipping the homework of digging through hundreds of options on Expedia. Boutique over big-box.',
     'about.faq4.h': 'Can You Book Hotels, Tours, or Flights Too?',
     'about.faq4.p': 'Flights — yes, if they\'re part of your cruise package. Hotels and tours — just message me on <a href="https://wa.me/15793810358?text=Hi%21%20I%27m%20interested%20in%20a%20cruise%20deal" target="_blank" rel="noopener" style="color:var(--gold-fill);font-weight:500;">WhatsApp</a> with what you\'re after. Even if I can\'t score you a better deal, I\'ll point you somewhere good.',
+    'about.faq5.h': 'Not Sure You Want to Book Yet?',
+    'about.faq5.p': 'Totally fine — no pressure! If you\'d rather wait and see, hit the <a href="index.html?subscribe=1" style="color:var(--gold-fill);font-weight:500;">🔔 Alert Me</a> button and tell us what you\'re looking for (region, season, cruise line — or leave it all blank). We\'ll email you the moment a matching deal comes up, so you can just sit back and wait for the right one to land in your inbox.',
+    'about.subscribe.h': 'Not Ready to Book Yet?',
+    'about.subscribe.p': 'Tell us what you\'re looking for and we\'ll email you the moment a matching deal drops — no pressure, unsubscribe anytime.',
+    'about.subscribe.btn': '🔔 Alert Me for Future Deals',
+    'about.footer.facebook': 'Facebook',
+    'about.footer.instagram': 'Instagram',
     'about.footer.tagline': 'Curated sailing voyages on only the ships worth sailing. Affordable luxury for those who travel with intention.',
     'about.footer.getintouch': 'Get In Touch',
     'about.footer.whatsapp': 'WhatsApp Chat',
@@ -678,6 +708,13 @@ const ABOUT_TRANSLATIONS = {
     'about.faq3.p': '我只放自己真心推薦的船——比較新、評價好、又划算。你可以把這想成幫你省下在 Expedia 上翻幾百個選項的功夫。精選勝過大雜燴。',
     'about.faq4.h': '你也能訂飯店、行程或機票嗎？',
     'about.faq4.p': '機票——如果是郵輪套裝行程的一部分，可以。飯店和行程——直接在 <a href="https://wa.me/15793810358?text=Hi%21%20I%27m%20interested%20in%20a%20cruise%20deal" target="_blank" rel="noopener" style="color:var(--gold-fill);font-weight:500;">WhatsApp</a>傳訊息告訴我你想找什麼就好。就算我沒辦法幫你談到更好的價錢，也會給你一些不錯的建議。',
+    'about.faq5.h': '還不確定要不要訂？',
+    'about.faq5.p': '完全沒問題，不會有壓力！如果你想再觀望一下，點選 <a href="index.html?subscribe=1" style="color:var(--gold-fill);font-weight:500;">🔔 通知我</a> 按鈕，告訴我們您在找什麼（地區、季節、郵輪公司——或全部留空也可以）。一有符合的優惠出現，我們就會email通知您，您只需要坐等最適合的優惠出現在信箱裡就好。',
+    'about.subscribe.h': '還沒準備好要訂？',
+    'about.subscribe.p': '告訴我們您在找什麼，一有符合的優惠我們就會email通知您——沒有壓力，隨時可取消訂閱。',
+    'about.subscribe.btn': '🔔 未來優惠通知我',
+    'about.footer.facebook': 'Facebook',
+    'about.footer.instagram': 'Instagram',
     'about.footer.tagline': '精選優質郵輪航程，僅選值得乘坐的船隻。以實惠的價格，享受有意義的奢華旅程。',
     'about.footer.getintouch': '聯絡方式',
     'about.footer.whatsapp': 'WhatsApp 聊聊',
