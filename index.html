@@ -564,7 +564,7 @@ nav.scrolled .lang-btn{color:rgba(10,22,40,0.82);}
   <ul class="nav-links">
     <li><button class="nav-cta" onclick="openAlertModal()"><span data-i18n="nav.quote">✎ Get Custom Quote</span></button></li>
     <li class="nav-divider"></li>
-    <li><button class="nav-cta" onclick="openFleet()"><span data-i18n="nav.ships">⚓ See Our Best Ships</span></button></li>
+    <li><a href="our-fleet.html" class="nav-cta" style="text-decoration:none;display:inline-flex;align-items:center;"><span data-i18n="nav.ships">⚓ See Our Best Ships</span></a></li>
   </ul>
   <div class="lang-switcher"><button class="lang-btn active" onclick="setLang('en')">EN</button><button class="lang-btn" onclick="setLang('zh')">繁中</button></div>
 </nav>
@@ -1419,6 +1419,7 @@ const shipPanels = {
   'disney-wish':      'sdp-disney-wish',
   'disney-treasure':  'sdp-disney-treasure',
   'disney-adventure': 'sdp-disney-adventure',
+  'disney-destiny': 'sdp-disney-destiny',
 };
 let activeShipPanel = null;
 let SHIP_PANELS_DATA = null;
@@ -1599,10 +1600,19 @@ function applyDealDeepLink(){
   }
 }
 
+function applyShipDeepLink(){
+  const params = new URLSearchParams(location.search);
+  const key = params.get('ship');
+  if(!key) return;
+  if(!shipPanels[key]) return;
+  setTimeout(()=>{ openShipDetail(key); }, 150);
+}
+
 // Init
 document.addEventListener("DOMContentLoaded", () => {
   filterDeals();
   applyDealDeepLink();
+  applyShipDeepLink();
   buildDestSeasonMap();
   buildLineAvailData();
 
