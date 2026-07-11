@@ -553,6 +553,12 @@ nav.scrolled .lang-btn{color:rgba(10,22,40,0.82);}
 @keyframes dealHighlightPulse{0%{box-shadow:0 0 0 0 rgba(201,168,76,0.65);}70%{box-shadow:0 0 0 16px rgba(201,168,76,0);}100%{box-shadow:0 0 0 0 rgba(201,168,76,0);}}
 .deal-card.deal-highlight{animation:dealHighlightPulse 1.4s ease-out 2;border-color:var(--gold);}
 </style>
+<style>
+/* This page has no dark hero photo behind the nav, so force the 'scrolled' (dark-on-light) look always, regardless of scroll position */
+#mainNav{background:rgba(255,255,255,0.97);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-bottom:1px solid rgba(201,168,76,0.35);}
+#mainNav .nl,#mainNav .nlt{color:#0A1628!important;}
+#mainNav .nav-cta{background:var(--gold-fill)!important;color:var(--navy)!important;border:none!important;}
+</style>
 </head>
 <body>
 
